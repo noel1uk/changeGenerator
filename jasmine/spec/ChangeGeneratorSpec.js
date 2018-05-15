@@ -1,8 +1,16 @@
 describe('ChangeGenerator', function() {
   
   describe('.change', function() {
+
+    describe('when given 2p', function() {
+      cg = new ChangeGenerator('2p', '1p');
+
+      it('returns 1 x 1p', function() {
+        expect(cg.change()).toEqual('1 x 1p');
+      });
+    });
     
-    describe('when given £1', function() {
+    describe('when given £1 for an item that costs 80p', function() {
 
       beforeEach(function() {
         cg = new ChangeGenerator('£1', '80p');
@@ -23,6 +31,14 @@ describe('ChangeGenerator', function() {
         });
       });
     });
-  })
-  
+    describe('when given 90p for an item that costs 80p', function() {
+      beforeEach(function() {
+        cg = new ChangeGenerator('90p', '80p')
+      });
+
+      it('returns `1 x 10p`', function() {
+        expect(cg.change()).toEqual('1 x 10p');
+      });
+    });
+  });
 });
